@@ -1,77 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mars Homework</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
+    <title>MARS HEMISPHERES</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+      img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        margin-left: 50px;
+        margin-right: 50px;
+      }
+    </style>
+
+  </head>
+
 <body>
-    <div class="jumbotron">
-        <h1 class="display-4">Mars Weather</h1>
-        <a href="http://127.0.0.1:8888/scrape">
-            <button type="button" class="btn btn-primary btn-lg">Scrape New Data</button>
-        </a>
-    </div>
-
-    <div class = "container">
-        <div class = "row">
-            <div class = "col-md-12"> 
-                <h3>Mars Tweet</h3>
-                <p>{{mars.mars_tweet}}</p>
-                <h3>Latest Mars News</h3>
-                <h5>{{mars.headline}}</h5>
-                <p>{{mars.article}}</p>
-                <h3>Mars Table</h3>
-                {{mars.mars_table|safe}}
-                <h3>Featured Mars Image</h3>
-                <img src="{{mars.image_url}}" alt="banner" width = 500px>
-            </div>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+          <h1>Mission To Mars</h1>
+          <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
         </div>
-        <div class = "row">
-            <div class = "col-md-12">
-                <h3>Hemisphere Images</h3>
-            </div>
-        </div>
-        <div class = "row">
-            <div class = "col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{mars.hemisphere_urls[0].img_url}}" alt="trial" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">{{mars.hemisphere_urls[0].title}}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{mars.hemisphere_urls[1].img_url}}" alt="trial" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">{{mars.hemisphere_urls[1].title}}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{mars.hemisphere_urls[2].img_url}}" alt="trial" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">{{mars.hemisphere_urls[2].title}}</h5>
-                    </div>
-                </div>
-            </div>
-            <div class = "col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{mars.hemisphere_urls[3].img_url}}" alt="trial" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">{{mars.hemisphere_urls[3].title}}</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> 
+        <h2>Latest Mars News</h2>
+        <h3>{{data_from_flask.news_title}}</h3>
+        <p>{{data_from_flask.paragraph}}</p>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
-
+        <div class="row">
+          <div class="col-md-6">
+            <h2>     Featured Image</h2>
+            <img src="{{data_from_flask['featured_image']}}" alt="Featured Image">
+          </div>
+          <div class="col-md-6">
+            <h2>   Mars Facts</h2>
+            {{data_from_flask['mars_facts'] | safe}}
+          </div>
+        </div>
+        <div class="row"></div>
+          <div class="col-md-12">
+            <h2><center>Mars Hemispheres</center></h2>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+              <img src="{{data_from_flask.hemisphere_images[0]['img_url']}}" alt="Featured Image">
+              <h3><center>{{data_from_flask.hemisphere_images[0]['title']}}</center></h3>
+            </div> 
+            <div class="col-md-6">
+              <img src="{{data_from_flask.hemisphere_images[1]['img_url']}}" alt="Featured Image">
+              <h3><center>{{data_from_flask.hemisphere_images[1]['title']}}</center></h3>
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col-md-6"> 
+              <img src="{{data_from_flask.hemisphere_images[2]['img_url']}}" alt="Featured Image">
+              <h3><center>{{data_from_flask.hemisphere_images[2]['title']}}</center></h3>
+            </div> 
+            <div class="col-md-6"> 
+              <img src="{{data_from_flask.hemisphere_images[03]['img_url']}}" alt="Featured Image">
+              <h3><center>{{data_from_flask.hemisphere_images[3]['title']}}</center></h3>
+            </div> 
+          </div> 
+      </div>
+      </div>   
+ 
 </body>
+
 </html>
